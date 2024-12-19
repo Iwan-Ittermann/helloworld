@@ -1,0 +1,393 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Iwan-Ittermann/helloworld/blob/master/Opinio%20python%20notebook\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "Nfr1Cs4sUloT"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "! pip3 install drawSvg\n",
+        "import bokeh.palettes\n",
+        "import drawSvg as draw\n",
+        "import numpy as np\n",
+        "import math\n",
+        "from scipy.optimize import minimize\n",
+        "from google.colab import auth\n",
+        "from google.auth import default\n",
+        "import gspread"
+      ],
+      "metadata": {
+        "id": "1X5eR-Tp_7Il",
+        "outputId": "5976a3c0-22d8-48fa-e86f-7987477bf2d6",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 682
+        }
+      },
+      "execution_count": 1,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Collecting drawSvg\n",
+            "  Downloading drawsvg-2.4.0-py3-none-any.whl.metadata (19 kB)\n",
+            "Downloading drawsvg-2.4.0-py3-none-any.whl (44 kB)\n",
+            "\u001b[?25l   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m0.0/44.1 kB\u001b[0m \u001b[31m?\u001b[0m eta \u001b[36m-:--:--\u001b[0m\r\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m44.1/44.1 kB\u001b[0m \u001b[31m3.0 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hInstalling collected packages: drawSvg\n",
+            "Successfully installed drawSvg-2.4.0\n"
+          ]
+        },
+        {
+          "output_type": "error",
+          "ename": "ModuleNotFoundError",
+          "evalue": "No module named 'drawSvg'",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mModuleNotFoundError\u001b[0m                       Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-1-868a5365e03b>\u001b[0m in \u001b[0;36m<cell line: 3>\u001b[0;34m()\u001b[0m\n\u001b[1;32m      1\u001b[0m \u001b[0mget_ipython\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0msystem\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m' pip3 install drawSvg'\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      2\u001b[0m \u001b[0;32mimport\u001b[0m \u001b[0mbokeh\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mpalettes\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m----> 3\u001b[0;31m \u001b[0;32mimport\u001b[0m \u001b[0mdrawSvg\u001b[0m \u001b[0;32mas\u001b[0m \u001b[0mdraw\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m      4\u001b[0m \u001b[0;32mimport\u001b[0m \u001b[0mnumpy\u001b[0m \u001b[0;32mas\u001b[0m \u001b[0mnp\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      5\u001b[0m \u001b[0;32mimport\u001b[0m \u001b[0mmath\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;31mModuleNotFoundError\u001b[0m: No module named 'drawSvg'",
+            "",
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0;32m\nNOTE: If your import is failing due to a missing package, you can\nmanually install dependencies using either !pip or !apt.\n\nTo view examples of installing some common dependencies, click the\n\"Open Examples\" button below.\n\u001b[0;31m---------------------------------------------------------------------------\u001b[0m\n"
+          ],
+          "errorDetails": {
+            "actions": [
+              {
+                "action": "open_url",
+                "actionText": "Open Examples",
+                "url": "/notebooks/snippets/importing_libraries.ipynb"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "nPxHTcfHUiN7"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [],
+      "metadata": {
+        "id": "k-lWNtGbUipP"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Config"
+      ],
+      "metadata": {
+        "id": "3f8kt4Usajb4"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Imports"
+      ],
+      "metadata": {
+        "id": "kvuPSiui_9e6"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "NORM_DISSENT = 10.0 #@param {type:\"number\"}\n",
+        "NORM_RESPECT = 5 #@param {type:\"number\"}\n",
+        "RADIUS_STEPS = 30 #@param {type:\"integer\"}\n",
+        "PALETTE = 'Dark2' #@param {type: \"string\"}\n",
+        "R_MAX = 300 #@param {type: \"number\"}\n"
+      ],
+      "metadata": {
+        "id": "fnlAAIBEZQaX"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Fetch & prepare data"
+      ],
+      "metadata": {
+        "id": "WMZq06YpALy0"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def map_node(row):\n",
+        "  return {\n",
+        "      'index': int(row['No. ']) - 1,\n",
+        "      'opinion': row['Opinion'],\n",
+        "      'label': row['Label']\n",
+        "      }\n",
+        "\n",
+        "def map_edge(row):\n",
+        "  return {\n",
+        "      'left': row['Opinion A'] - 1,\n",
+        "      'right': row['Opinion B'] - 1,\n",
+        "      'dissent': row['Avg. Dissent Rating'] / NORM_DISSENT,\n",
+        "      'respect': (NORM_RESPECT + row['Avg. Respect Rating']) / (2 * NORM_RESPECT)\n",
+        "  }\n",
+        "\n",
+        "auth.authenticate_user()\n",
+        "credentials, _ = default()\n",
+        "dataset = gspread.authorize(credentials).open('polarizer data set')\n",
+        "\n",
+        "# Fetch and map nodes\n",
+        "nodes = sorted([\n",
+        "                  map_node(row)\n",
+        "                  for row in dataset.worksheet('Nodes').get_all_records()\n",
+        "               ], key=lambda node: node['index'])\n",
+        "assert nodes[len(nodes) - 1]['index'] == len(nodes) -1\n",
+        "\n",
+        "# Fetch and map edges\n",
+        "edges = [\n",
+        "          map_edge(row)\n",
+        "          for row in dataset.worksheet('Edges').get_all_records()\n",
+        "        ]"
+      ],
+      "metadata": {
+        "id": "hK_z5BhTAIsE"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Play around a little"
+      ],
+      "metadata": {
+        "id": "N_NCusDBIOyV"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(edges)\n",
+        "print(nodes)"
+      ],
+      "metadata": {
+        "id": "CKe8b9LiIPGa"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Layout"
+      ],
+      "metadata": {
+        "id": "_lIx8REhZy_y"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# TODO: Assuming all edges come in semi-canonical form\n",
+        "\n",
+        "def angle_distance(angles_vec, left, right):\n",
+        "  sin_comp = math.sin(angles_vec[left] - angles_vec[right])\n",
+        "  cos_comp = math.cos(angles_vec[left] - angles_vec[right])\n",
+        "  return abs(math.atan2(sin_comp, cos_comp)) / math.pi  # max 180 deg\n",
+        "\n",
+        "# Angles array\n",
+        "size = max(v[\"index\"] for v in nodes) + 1\n",
+        "x0 = np.zeros(size) # np.random.rand(size)\n",
+        "\n",
+        "def error_func(angle_vec: np.ndarray):\n",
+        "  error = 0\n",
+        "  for edge in edges:\n",
+        "    # TODO: pow?\n",
+        "    distance = angle_distance(angle_vec, edge[\"left\"], edge[\"right\"])\n",
+        "    error += abs(distance - edge[\"dissent\"])\n",
+        "  return error\n",
+        "\n",
+        "res = minimize(error_func,\n",
+        "               x0,\n",
+        "               method='SLSQP',\n",
+        "               options={'disp': False, 'maxiter': 500}, tol=0.001)\n",
+        "\n",
+        "angles = res.x\n",
+        "\n",
+        "# Determine non-connected nodes\n",
+        "non_connected_nodes = set(range(0, size))\n",
+        "for edge in edges:\n",
+        "  non_connected_nodes.discard(edge[\"left\"])\n",
+        "  non_connected_nodes.discard(edge[\"right\"])\n",
+        "\n",
+        "# # Calculate radi: Weight respect by angle distance\n",
+        "# weighted_sums = np.zeros(size)\n",
+        "# total_weights = np.zeros(size)\n",
+        "# for i in range(0, size):\n",
+        "#   for edge in edges:\n",
+        "#     left = edge[\"left\"]\n",
+        "#     right = edge[\"right\"]\n",
+        "#     weight = angle_distance(angles, left, right) # i.e. weight == distance\n",
+        "#     if weight > 0.5:\n",
+        "#       weighted_sums[left] += weight * edge[\"respect\"]\n",
+        "#       weighted_sums[right] += weight * edge[\"respect\"]\n",
+        "#       total_weights[left] += weight\n",
+        "#       total_weights[right] += weight\n",
+        "# radii = np.zeros(size)\n",
+        "# for i in range(0, size):\n",
+        "#   if i in non_connected_nodes or total_weights[i] == 0:\n",
+        "#     radii[i] = 1\n",
+        "#   else:\n",
+        "#     radii[i] = 1 - weighted_sums[i] / total_weights[i]\n",
+        "\n",
+        "# Calculate radi using average respect * dissent\n",
+        "sums = np.zeros(size)\n",
+        "counts = np.zeros(size)\n",
+        "for edge in edges:\n",
+        "  score = edge[\"respect\"] * edge[\"dissent\"]\n",
+        "  counts[edge[\"left\"]] += 1\n",
+        "  counts[edge[\"right\"]] += 1\n",
+        "  sums[edge[\"left\"]] += score\n",
+        "  sums[edge[\"right\"]] += score\n",
+        "\n",
+        "radii = np.zeros(size)\n",
+        "for i in range(0, size):\n",
+        "  if i in non_connected_nodes or counts[i] == 0:\n",
+        "    radii[i] = 1\n",
+        "  else:\n",
+        "    radii[i] = 1 - sums[i] / counts[i]\n",
+        "\n",
+        "\n"
+      ],
+      "metadata": {
+        "id": "aC2sb834Z41O"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Label Colors"
+      ],
+      "metadata": {
+        "id": "bhUIqgplaDdv"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "distinct_labels = set((n[\"label\"] for n in nodes))\n",
+        "colors = bokeh.palettes.all_palettes[PALETTE][max(3, len(distinct_labels))]\n",
+        "label_colors = dict(zip(distinct_labels, colors))"
+      ],
+      "metadata": {
+        "id": "iT54-elDaH_b"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Draw"
+      ],
+      "metadata": {
+        "id": "ub05zdNNAEwb"
+      }
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "4AcY94Pw9oUK"
+      },
+      "outputs": [],
+      "source": [
+        "\n",
+        "svg = draw.Drawing(R_MAX * 2.5, R_MAX * 2.5, origin='center', displayInline=False)\n",
+        "\n",
+        "def node_coords(idx):\n",
+        "  angle = angles[idx]\n",
+        "  cont_radius = radii[idx] * R_MAX\n",
+        "  radius = round(cont_radius / RADIUS_STEPS) * RADIUS_STEPS\n",
+        "  return (radius * math.cos(angle), radius * math.sin(angle))\n",
+        "\n",
+        "for r in range(0, R_MAX + 1, RADIUS_STEPS):\n",
+        "  svg.append(draw.Circle(0, 0, r,\n",
+        "              fill=None, fill_opacity=0.0, stroke_width=2, stroke='green'))\n",
+        "\n",
+        "\n",
+        "for edge in edges:\n",
+        "  x1, y1 = node_coords(edge[\"left\"])\n",
+        "  x2, y2 = node_coords(edge[\"right\"])\n",
+        "  edge_color = \"grey\"\n",
+        "  left_color = label_colors[nodes[edge[\"left\"]][\"label\"]]\n",
+        "  right_color = label_colors[nodes[edge[\"right\"]][\"label\"]]\n",
+        "  if left_color == right_color:\n",
+        "    edge_color = left_color\n",
+        "  e = draw.Line(x1, y1, x2, y2, stroke=edge_color, stroke_width=1, stroke_opacity=0.3)\n",
+        "  svg.append(e)\n",
+        "\n",
+        "for i in range(0, size):\n",
+        "\n",
+        "  if i in non_connected_nodes:\n",
+        "    continue\n",
+        "\n",
+        "  x, y = node_coords(i)\n",
+        "\n",
+        "  color = label_colors[nodes[i][\"label\"]]\n",
+        "  c = draw.Circle(\n",
+        "      x,\n",
+        "      y,\n",
+        "      10,\n",
+        "      fill=color,\n",
+        "      fill_opacity=0.5,\n",
+        "      stroke_width=1,\n",
+        "      stroke='white')\n",
+        "  c.appendTitle(nodes[i][\"opinion\"])\n",
+        "  svg.append(c)\n",
+        "\n",
+        "\n",
+        "svg\n"
+      ]
+    }
+  ]
+}
